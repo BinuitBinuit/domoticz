@@ -323,15 +323,21 @@ void CTeleinfoBase::ProcessTeleinfo(const std::string &name, int rank, Teleinfo 
 				SendKwhMeter(m_HwdID, 32*rank + 101, 255, teleinfo.SINSTS, teleinfo.EAST/1000.0, name + " kWh Consommés Total");
 				SendKwhMeter(m_HwdID, 32*rank + 102, 255, teleinfo.SINSTI, teleinfo.EAIT/1000.0, name + " kWh Injectés Total");
 				SendWattMeter(m_HwdID, 32*rank + 103, 255, teleinfo.PREF, name + " kW Reference");
-				SendWattMeter(m_HwdID, 32*rank + 103, 255, teleinfo.PCOUP, name + " kW Coupure");
-				SendWattMeter(m_HwdID, 32*rank + 103, 255, teleinfo.SINSTS1, name + " kW Consommés Phase 1");
-				SendWattMeter(m_HwdID, 32*rank + 103, 255, teleinfo.SINSTS2, name + " kW Consommés Phase 2");
-				SendWattMeter(m_HwdID, 32*rank + 103, 255, teleinfo.SINSTS3, name + " kW Consommés Phase 3");
-				SendWattMeter(m_HwdID, 32*rank + 103, 255, teleinfo.SMAXSN, name + " kW Max Consommés");
-				SendWattMeter(m_HwdID, 32*rank + 103, 255, teleinfo.SMAXSN1, name + " kW Max Consommés Phase 1");
-				SendWattMeter(m_HwdID, 32*rank + 103, 255, teleinfo.SMAXSN2, name + " kW Max Consommés Phase 2");
-				SendWattMeter(m_HwdID, 32*rank + 103, 255, teleinfo.SMAXSN3, name + " kW Max Consommés Phase 3");
-				SendWattMeter(m_HwdID, 32*rank + 103, 255, teleinfo.SMAXIN, name + " kW Max Injectés");
+				SendWattMeter(m_HwdID, 32*rank + 104, 255, teleinfo.PCOUP, name + " kW Coupure");
+				if (teleinfo.triphase)
+				{
+					SendWattMeter(m_HwdID, 32*rank + 105, 255, teleinfo.SINSTS1, name + " kW Consommés Phase 1");
+					SendWattMeter(m_HwdID, 32*rank + 106, 255, teleinfo.SINSTS2, name + " kW Consommés Phase 2");
+					SendWattMeter(m_HwdID, 32*rank + 107, 255, teleinfo.SINSTS3, name + " kW Consommés Phase 3");
+				}
+				SendWattMeter(m_HwdID, 32*rank + 108, 255, teleinfo.SMAXSN, name + " kW Max Consommés");
+				if (teleinfo.triphase)
+				{
+					SendWattMeter(m_HwdID, 32*rank + 109, 255, teleinfo.SMAXSN1, name + " kW Max Consommés Phase 1");
+					SendWattMeter(m_HwdID, 32*rank + 110, 255, teleinfo.SMAXSN2, name + " kW Max Consommés Phase 2");
+					SendWattMeter(m_HwdID, 32*rank + 111, 255, teleinfo.SMAXSN3, name + " kW Max Consommés Phase 3");
+				}
+				SendWattMeter(m_HwdID, 32*rank + 112, 255, teleinfo.SMAXIN, name + " kW Max Injectés");
 			}
 		}
 		
