@@ -162,7 +162,8 @@ void CTeleinfoSerial::MatchLine()
 		return;
 
 	// Extract the elements, return if not enough and line is invalid
-	StringSplit(line, " ", splitresults);
+	// The separator is always at position [end - 2] of the line
+	StringSplit(line, line[strlen(line) - 2], splitresults);
 	if (splitresults.size() <3)
 	{
 		_log.Log(LOG_ERROR,"Frame #%s# passed the checksum test but failed analysis", line);
