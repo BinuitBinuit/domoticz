@@ -195,11 +195,25 @@ void CTeleinfoSerial::MatchLine()
 	else if (label == "IINST2") teleinfo.IINST2 = value;
 	else if (label == "IINST3") teleinfo.IINST3 = value;
 	else if (label == "PPOT")  teleinfo.PPOT = value;
-	else if ((label == "MOTDETAT") || (label == "STGE")) m_counter++;
-	else if (label == "SINSTS") teleinfo.SINSTS = value;
-	else if (label == "SINSTI") teleinfo.SINSTI = value;
+	else if (label == "MOTDETAT") m_counter++;
+	//-----Linky Standard mode
+	else if (label == "ADSC") teleinfo.ADSC = vString;
 	else if (label == "EAST") teleinfo.EAST = value;
 	else if (label == "EAIT") teleinfo.EAIT = value;
+	else if (label == "PREF") teleinfo.PREF = value;
+	else if (label == "PCOUP") teleinfo.PCOUP = value;
+	else if (label == "SINSTS") teleinfo.SINSTS = value;
+	else if (label == "SINSTS1") teleinfo.SINSTS1 = value;
+	else if (label == "SINSTS2") teleinfo.SINSTS2 = value;
+	else if (label == "SINSTS3") teleinfo.SINSTS3 = value;
+	else if (label == "SMAXSN") teleinfo.SMAXSN = value;
+	else if (label == "SMAXSN1") teleinfo.SMAXSN1 = value;
+	else if (label == "SMAXSN2") teleinfo.SMAXSN2 = value;
+	else if (label == "SMAXSN3") teleinfo.SMAXSN3 = value;
+	else if (label == "SINSTI") teleinfo.SINSTI = value;
+	else if (label == "SMAXIN") teleinfo.SMAXIN = value;
+	else if (label == "STGE") m_counter++;
+	//-----
 
 	// at 1200 baud we have roughly one frame per 1,5 second, check more frequently for alerts.
 	if (m_counter >= m_iBaudRate/600)

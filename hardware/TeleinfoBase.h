@@ -75,12 +75,26 @@ class CTeleinfoBase : public CDomoticzHardwareBase
 			std::string rate;
 			std::string tariff;
 			std::string color;
-			uint32_t SINSTS;
-			uint32_t SINSTI;
+			//-----Linky Standard mode
+			std::string ADSC;
 			uint32_t EAST;
 			uint32_t EAIT;
+			uint32_t PREF;
+			uint32_t PCOUP;
+			uint32_t SINSTS;
+			uint32_t SINSTS1;
+			uint32_t SINSTS2;
+			uint32_t SINSTS3;
+			uint32_t SMAXSN;
+			uint32_t SMAXSN1;
+			uint32_t SMAXSN2;
+			uint32_t SMAXSN3;
+			uint32_t SINSTI;
+			uint32_t SMAXIN;
+			//-----
 			time_t   last;
 			bool    triphase;
+			bool	linkyStandard;
 			int    CRCmode1;	 // really a bool, but with a special "un-initialized state"
 			_tTeleinfo()
 			{
@@ -113,12 +127,25 @@ class CTeleinfoBase : public CDomoticzHardwareBase
 				pAlertColor = 10;
 				pAlertEJP = 10;
 				pAlertDemain = 10;
-				SINSTS = 0;
-				SINSTI = 0;
+				//-----Linky Standard mode
 				EAST = 0;
 				EAIT = 0;
+				PREF = 0;
+				PCOUP = 0;
+				SINSTS = 0;
+				SINSTS1 = 0;
+				SINSTS2 = 0;
+				SINSTS3 = 0;
+				SMAXSN = 0;
+				SMAXSN1 = 0;
+				SMAXSN2 = 0;
+				SMAXSN3 = 0;
+				SINSTI = 0;
+				SMAXIN = 0;
+				//-----
 				last = 0;
 				triphase = false;
+				standard = false;
 				CRCmode1 = 255;	 // means "bool not initialized yet", will be when running CRC Check for the first time
 			}
 		} Teleinfo;
