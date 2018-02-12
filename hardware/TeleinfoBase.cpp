@@ -286,7 +286,7 @@ void CTeleinfoBase::ProcessTeleinfo(const std::string &name, int rank, Teleinfo 
 				}
 			}
 			
-			SendKwhMeter(m_HwdID, 32*rank + 100, 255, (teleinfo.SINSTS - teleinfo.SINSTI), (teleinfo.EAST - teleinfo.EAIT)/1000.0, name + " kWh Total");
+			SendKwhMeter(m_HwdID, 32*rank + 100, 255, float(teleinfo.SINSTS - teleinfo.SINSTI), float(teleinfo.EAST - teleinfo.EAIT)/1000.0, name + " kWh Total");
 		}
 		// Common sensors for all rates
 		// Alerts can be updated at every call and are not subject to the "rate limit" interval

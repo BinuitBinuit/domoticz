@@ -195,7 +195,7 @@ void CTeleinfoSerial::MatchLine()
 	else if (label == "IINST2") teleinfo.IINST2 = value;
 	else if (label == "IINST3") teleinfo.IINST3 = value;
 	else if (label == "PPOT")  teleinfo.PPOT = value;
-	else if ((label == "MOTDETAT") || (label == "VTIC")) m_counter++;
+	else if ((label == "MOTDETAT") || (label == "STGE")) m_counter++;
 	else if (label == "SINSTS") teleinfo.SINSTS = value;
 	else if (label == "SINSTI") teleinfo.SINSTI = value;
 	else if (label == "EAST") teleinfo.EAST = value;
