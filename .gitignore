@@ -38,4 +38,5 @@ scripts/dzVents/runtime/tests/luacov.stats.out
 scripts/dzVents/runtime/tests/luacov.report.out
 .idea/
 /.idea_/
-
+*.kdev4
+/.kdev4/

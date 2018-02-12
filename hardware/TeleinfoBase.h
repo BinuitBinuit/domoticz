@@ -75,6 +75,10 @@ class CTeleinfoBase : public CDomoticzHardwareBase
 			std::string rate;
 			std::string tariff;
 			std::string color;
+			uint32_t SINSTS;
+			uint32_t SINSTI;
+			uint32_t EAST;
+			uint32_t EAIT;
 			time_t   last;
 			bool    triphase;
 			int    CRCmode1;	 // really a bool, but with a special "un-initialized state"
@@ -109,6 +113,10 @@ class CTeleinfoBase : public CDomoticzHardwareBase
 				pAlertColor = 10;
 				pAlertEJP = 10;
 				pAlertDemain = 10;
+				SINSTS = 0;
+				SINSTI = 0;
+				EAST = 0;
+				EAIT = 0;
 				last = 0;
 				triphase = false;
 				CRCmode1 = 255;	 // means "bool not initialized yet", will be when running CRC Check for the first time
