@@ -162,7 +162,8 @@ void CTeleinfoSerial::MatchLine()
 		return;
 
 	// Extract the elements, return if not enough and line is invalid
-	std::string separator = line[strlen(line) - 2];
+	std::string separator;
+	separator += line[strlen(line) - 2];
 	StringSplit(line, separator, splitresults);
 	if (splitresults.size() <3)
 	{
