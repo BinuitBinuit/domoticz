@@ -172,8 +172,8 @@ void CTeleinfoSerial::MatchLine()
 	}
 
 	label = splitresults[0];
-	vString = splitresults[1];
-	value = atoi(splitresults[1].c_str());
+	vString = splitresults[splitresults.size() - 2];
+	value = atoi(vString.c_str());
 
 	if (label == "ADCO") teleinfo.ADCO = vString;
 	else if (label == "OPTARIF") teleinfo.OPTARIF = vString;
@@ -215,6 +215,8 @@ void CTeleinfoSerial::MatchLine()
 	else if (label == "SINSTI") teleinfo.SINSTI = value;
 	else if (label == "SMAXIN") teleinfo.SMAXIN = value;
 	else if (label == "STGE") m_counter++;
+	// !!! A cause des problèmes de décodage...
+	m_counter++;
 	//-----
 
 	// at 1200 baud we have roughly one frame per 1,5 second, check more frequently for alerts.
