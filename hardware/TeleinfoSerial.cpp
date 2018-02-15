@@ -237,23 +237,37 @@ void CTeleinfoSerial::ParseData(const char *pData, int Len)
 	{
 		const char c = pData[ii];
 
-		if ((c == 0x0d) || (c == 0x00) || (c == 0x02) || (c == 0x03))
+		// Discard special characters
+		if ((c == 0x00) || (c == 0x01) || (c == 0x04) || (c == 0x05) || (c == 0x06) || (c == 0x07) || (c == 0x08) || (c == 0x0c) || (c == 0x0d))
 		{
 			ii++;
 			continue;
 		}
 
 		m_buffer[m_bufferpos] = c;
-		if (c == 0x0a || m_bufferpos == sizeof(m_buffer) - 1)
+		// If new line is found
+		if ((c == 0x02) || (c == 0x03) || (c == 0x0a) || (c == 0x0b) || (c == 0x0e) || (c == 0x0f))
 		{
-			// discard newline, close string, parse line and clear it.
-			if (m_bufferpos > 0)
-				m_buffer[m_bufferpos] = 0;
+			// Close string
+			m_buffer[m_bufferpos] = 0;
 
-			//We process the line only if the checksum is ok and user did not request to bypass CRC verification
-			if ((m_bDisableCRC) || isCheckSumOk(teleinfo.CRCmode1))
-				MatchLine();
+			// Discard lines too small
+			if (m_bufferpos >= 4)
+			{
+				//We process the line only if the checksum is ok and user did not request to bypass CRC verification
+				if ((m_bDisableCRC) || isCheckSumOk(teleinfo.CRCmode1))
+					MatchLine();
+			}
 
+			m_bufferpos = 0;
+		}
+		else if (m_bufferpos == sizeof(m_buffer) - 1)
+		{
+			// close string
+			m_buffer[m_bufferpos] = 0;
+			
+			_log.Log(LOG_ERROR, "(%s) Teleinfo buffer is full! Line skipped.", Name.c_str(), m_buffer);
+			
 			m_bufferpos = 0;
 		}
 		else
@@ -320,7 +334,7 @@ bool CTeleinfoSerial::isCheckSumOk(int &isMode1)
 			_log.Log(LOG_STATUS, "(%s) Teleinfo CRC check mode set to 1", Name.c_str());
 		}
 	}
-	else if (mode2 == checksum)
+	if (mode2 == checksum)
 	{
 		line_ok = true;
 		if (isMode1 != false)	 // if this is first run, will still be at 255
